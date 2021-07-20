@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ionic-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      deployment-name: api
+  template:
+    metadata:
+      labels:
+        deployment-name: api
+    spec:
+      containers:
+        - name: api-container
+          image: kasia70/api-test:v4
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: ionic-cluster-service
+  name: ionic-cluster-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: ionic-cluster-service-port
+    port: 80
+    protocol: TCP
+  selector:
+    deployment-name: api-clusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: ionic-cluster-service-loadbalancer 
+  name: ionic-cluster-service-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+  - name: load-balancer-service-port
+    port: 80
+    protocol: TCP
+  selector:
+    deployment-name: api-loadBalancer
