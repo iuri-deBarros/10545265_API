@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ionic-api
+  name: 21-07-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      deployment-name: api
+      deployment-name: 21-07-api
   template:
     metadata:
       labels:
-        deployment-name: api
+        deployment-name: 21-07-api
     spec:
       containers:
-        - name: api-container
-          image: kasia70/api-test:v4
+        - name: 21-07-api-container
+          image: iurib8it148.azurecr.io/buildingtesting:945d09a9bcf61f3b487ad91daf40e8cfea85a6fd
           ports:
             - containerPort: 8080
 ---

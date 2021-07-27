@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      deployment-name: 21-07-api-mongo
+  template:
+    metadata:
+      labels:
+        deployment-name: 21-07-api-mongo
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo
+        ports:
+        - name: mongodbport
+          containerPort: 27017
+          protocol: TCP
