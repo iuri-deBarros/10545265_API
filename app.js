@@ -6,7 +6,7 @@ const routes = require("./routes");
 
 console.log(process.argv);
 
-mongoose.connect("mongodb://localhost:27017/ca-db", {useNewUrlParser: true}).then(()=>{
+mongoose.connect(process.argv[3], {useNewUrlParser: true}).then(()=>{
     const app = express();
     app.use(session({
         secret : "caAPISecret",

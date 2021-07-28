@@ -19,3 +19,33 @@ spec:
         - name: mongodbport
           containerPort: 27017
           protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+   service-label: ca-api-cluster-service
+  name: ca-frontend-cluster-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: ca-api-service-port
+    port: 27017
+    protocol: TCP
+  selector:
+    deployment-name: ca-mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: ca-api-cluster-service
+  name: application-frontend-cluster-service-loadbalancer
+spec: 
+  type: LoadBalancer
+  ports:
+  - name: ca-frontend-load-balancer-service-port
+    port: 27017
+    protocol: TCP
+  selector:
+    deployment-name: ca-mongo
