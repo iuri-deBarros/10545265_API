@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: 21-07-api-container
-          image: iurib8it148.azurecr.io/buildingtesting:945d09a9bcf61f3b487ad91daf40e8cfea85a6fd
+          image: iurib8it148.azurecr.io/apirepository:2df98ab88e4d5f4a2e827616b8a91714f9627049
           ports:
             - containerPort: 8080
 ---
