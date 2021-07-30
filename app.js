@@ -21,4 +21,3 @@ mongoose.connect(process.argv[3], {useNewUrlParser: true}).then(()=>{
         console.log("CA API started on port 3000, test using http://localhost:3000");
     });
 });
-

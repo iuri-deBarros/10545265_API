@@ -1,51 +1,55 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: mongo-deployment
+  labels:
+    app: mongo-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      deployment-name: 21-07-api-mongo
+      app: mongo-pod
   template:
     metadata:
+      name: mongo-pod
       labels:
-        deployment-name: 21-07-api-mongo
+        app: mongo-pod
     spec:
       containers:
-      - name: mongodb
-        image: mongo
-        ports:
-        - name: mongodbport
-          containerPort: 27017
-          protocol: TCP
+        - name: mongodb-container
+          image: mongo
+          env: 
+            - name: MONGO_INITDB_DATABASE
+              value: database
+          ports:
+            - containerPort: 27017 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-   service-label: ca-api-cluster-service
-  name: ca-frontend-cluster-service
+    service-label: mongo-cluster-service
+  name: mongo-cluster-service
 spec:
   type: ClusterIP
   ports:
-  - name: ca-api-service-port
-    port: 27017
+  - name: mongo-cluster-service-port
+    port: 80
     protocol: TCP
   selector:
-    deployment-name: ca-mongo
+    deployment-name: mongo-pod
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  name: mongo-service
   labels:
-    service-label: ca-api-cluster-service
-  name: application-frontend-cluster-service-loadbalancer
-spec: 
+    app: mongo-service
+spec:
   type: LoadBalancer
   ports:
-  - name: ca-frontend-load-balancer-service-port
-    port: 27017
-    protocol: TCP
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
   selector:
-    deployment-name: ca-mongo
+    app: mongo-pod
