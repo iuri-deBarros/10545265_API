@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api-container-02-08
-          image: iuri89/api-image-02-08:latest
+          image: iurib8it148.azurecr.io/02-08-apicontainerrepository:fe7c90a58bf2dfa345393670c429e0b3d48b3ead
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
