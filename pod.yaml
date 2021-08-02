@@ -32,7 +32,7 @@ spec:
     port: 3000
     protocol: TCP
   selector:
-    deployment-name: ionic-frontend
+    deployment-name: api-02-08-deployment
 ---
 apiVersion: v1
 kind: Service
@@ -47,4 +47,4 @@ spec:
     port: 3000
     protocol: TCP
   selector:
-    deployment-name: frontend-02-08-deployment
+    deployment-name: api-02-08-deployment
