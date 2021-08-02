@@ -23,12 +23,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service-label: api-service-label-cluster-service-02-08
+    service-label: api-label-cluster-service-02-08
   name: api-02-08-cluster-service
 spec:
   type: ClusterIP
   ports:
-  - name: ionic-cluster-service-port
+  - name: api-cluster-service-port
     port: 3000
     protocol: TCP
   selector:
@@ -38,7 +38,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service-label: api-service-label-cluster-service-02-08 
+    service-label: api-label-cluster-service-02-08 
   name: api-02-08-loadbalancer
 spec:
   type: LoadBalancer
