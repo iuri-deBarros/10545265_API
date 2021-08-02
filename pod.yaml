@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service-label: 02-08-api-service-label-cluster-service
+    service-label: api-service-label-cluster-service-02-08
   name: api-02-08-cluster-service
 spec:
   type: ClusterIP
@@ -38,8 +38,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service-label: 02-08-service-label-cluster-service 
-  name: api02-08-loadbalancer
+    service-label: api-service-label-cluster-service-02-08 
+  name: api-02-08-loadbalancer
 spec:
   type: LoadBalancer
   ports:
