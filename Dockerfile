@@ -5,4 +5,3 @@ RUN npm install -g angular
 RUN npm install
 COPY ./ /app/
 RUN npm start
-FROM nginx:alpine

@@ -1,19 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-deployment
-  labels:
-    app: mongo-deployment
+  name: mongodb-02-08-deployment
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: mongo-pod
+      deployment-name: mongodb-02-08-deployment
+  replicas: 2
   template:
     metadata:
-      name: mongo-pod
       labels:
-        app: mongo-pod
+        deployment-name: mongodb-02-08-deployment 
     spec:
       containers:
         - name: mongodb-container
@@ -28,28 +25,28 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service-label: mongo-cluster-service
-  name: mongo-cluster-service
+    service-label: mongo-cluster-service-02-08
+  name: mongo-02-08-cluster-service
 spec:
   type: ClusterIP
   ports:
-  - name: mongo-cluster-service-port
-    port: 80
+  - name: ionic-cluster-service-port
+    port: 27017
     protocol: TCP
   selector:
-    deployment-name: mongo-pod
+    deployment-name: mongodb-02-08-deployment
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo-service
   labels:
-    app: mongo-service
+    service-label: mongo-cluster-service-02-08 
+  name: mongo-02-08-loadbalancer
 spec:
   type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 27017
-      targetPort: 27017
+  - name: load-balancer-service-port
+    port: 27017
+    protocol: TCP
   selector:
-    app: mongo-pod
+    deployment-name: mongodb-02-08-deployment
